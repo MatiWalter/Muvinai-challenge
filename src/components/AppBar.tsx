@@ -16,9 +16,9 @@ export const AppBar = () => {
       fixed
       height={60}
       sx={{
+        alignItems: 'center',
         backgroundColor: dark ? colors.dark[4] : white,
         display: 'flex',
-        alignItems: 'center',
         justifyContent: 'space-between'
       }}
     >
@@ -37,12 +37,12 @@ export const AppBar = () => {
       </Group>
       <UnstyledButton
         sx={{
+          alignItems: 'center',
           backgroundColor: dark ? colors.dark[9] : colors.gray[1],
           borderRadius: 50,
           display: 'flex',
-          alignItems: 'center',
-          marginRight: 15,
           height: 40,
+          marginRight: 15,
           padding: 15,
         }}
         onClick={() => toggleColorScheme()}
@@ -55,8 +55,8 @@ export const AppBar = () => {
                 backgroundColor: colors.yellow[5],
                 borderRadius: 100,
                 height: 20,
+                padding: 5,
                 width: 20,
-                padding: 5
               }}
             >
               <BsSun size={20} />
@@ -71,8 +71,8 @@ export const AppBar = () => {
                 backgroundColor: colors.blue[8],
                 borderRadius: 100,
                 height: 20,
+                padding: 5,
                 width: 20,
-                padding: 5
               }}
             >
               <BsMoon color={white} size={20} />
