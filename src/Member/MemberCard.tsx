@@ -1,7 +1,7 @@
-import { Anchor, Box, Container, Space, Text, Title } from '@mantine/core';
+import { Anchor, Box, Container, Group, Text, Title } from '@mantine/core';
 import { useMantineTheme } from '@mantine/core';
 import { BsWhatsapp } from 'react-icons/bs';
-import { RiCake2Fill } from 'react-icons/ri';
+import { RiCake2Fill, RiPhoneFill } from 'react-icons/ri';
 
 import { MemberAvatar } from './MemberAvatar';
 
@@ -12,6 +12,8 @@ interface MemberCardProps {
   alt?: string;
   email?: string;
   birthday?: Date;
+  dni?: string;
+  phone?: string;
 }
 
 export const MemberCard = ({
@@ -21,6 +23,8 @@ export const MemberCard = ({
   alt,
   email,
   birthday,
+  dni,
+  phone
 }: MemberCardProps) => {
 
   const { colors } = useMantineTheme();
@@ -36,24 +40,28 @@ export const MemberCard = ({
       }}
     >
       <MemberAvatar alt={alt} path={path} />
-      <Box ml='md' sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+      <Group align='center' direction='column' ml='md' spacing='xs'>
+        <Group spacing='xs'>
           <Title order={2}>{name} {lastName}</Title>
-          <Box ml='xs' sx={{ display: 'flex', alignItems: 'center' }}>
-            <Anchor href='#'sx={{ display: 'flex', alignItems: 'center' }} target="_blank">
+          <Box>
+            <Anchor href='#' sx={{ display: 'flex', alignItems: 'center' }} target="_blank">
               <BsWhatsapp color={colors.green[8]} size={25} />
             </Anchor>
           </Box>
-        </Box>
-        <Text>{email}</Text>
-        <Space h='xs' />
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <RiCake2Fill color={colors.red[9]} size={25} />
-          <Text align='center' ml='xs'>{birthday?.toLocaleDateString()}</Text>
-        </Box>
-        <Space h='xs' />
-
-      </Box>
+        </Group>
+        <Group align='center' direction='column' spacing='xs'>
+          <Text>{email}</Text>
+          <Group spacing='xs'>
+            <RiPhoneFill color={colors.blue[8]} size={25} />
+            <Text>+{phone}</Text>
+          </Group>
+          <Group spacing='xs'>
+            <RiCake2Fill color={colors.red[9]} size={25} />
+            <Text>{birthday?.toLocaleDateString()}</Text>
+          </Group>
+          <Text>DNI: {dni}</Text>
+        </Group>
+      </Group>
     </Container>
   );
 };
