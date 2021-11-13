@@ -1,8 +1,11 @@
 import * as React from 'react';
-import { MantineProvider, ColorSchemeProvider, ColorScheme  } from '@mantine/core';
+import { MantineProvider, ColorSchemeProvider, ColorScheme, Space, AppShell, Navbar, Text, Header, MediaQuery, Burger, useMantineTheme } from '@mantine/core';
+
+import { AppBar } from '~/components/AppBar';
 
 import { IMember } from './Member';
 import { MemberProfile } from './Member';
+
 
 function App() {
 
@@ -22,14 +25,51 @@ function App() {
     avatar: 'https://reqres.in/img/faces/7-image.jpg'
   };
 
-  const [colorScheme, setColorScheme] = React.useState<ColorScheme>('light');
+  const [colorScheme, setColorScheme] = React.useState<ColorScheme>('dark');
   const toggleColorScheme = (value?: ColorScheme) =>
     setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+
+  const [opened, setOpened] = React.useState<boolean>(false);
+  const { colors } = useMantineTheme();
 
   return (
     <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
       <MantineProvider theme={{ colorScheme }}>
-        <MemberProfile member={mock} />
+        <AppShell
+          fixed
+          header={
+            <Header height={60}>
+              <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+                <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
+                  <Burger
+                    color={colors.gray[6]}
+                    ml='xs'
+                    opened={opened}
+                    size="sm"
+                    onClick={() => setOpened(!opened)}
+                  />
+                </MediaQuery>
+                <AppBar />
+              </div>
+            </Header>
+          }
+          navbar={
+            <Navbar
+              hidden={!opened}
+              hiddenBreakpoint="sm"
+              padding="xs"
+              width={{ base: 200, breakpoints: { sm: '100%', lg: 300 } }}>
+              <Text>Navegacion</Text>
+            </Navbar>
+          }
+          navbarOffsetBreakpoint="sm"
+          styles={(theme) => ({
+            main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },
+          })}
+        >
+          <Space h={100} />
+          <MemberProfile member={mock} />
+        </AppShell>
       </MantineProvider>
     </ColorSchemeProvider>
   );

@@ -1,5 +1,13 @@
-import { Anchor, Box, Container, Group, Text, Title } from '@mantine/core';
-import { useMantineTheme } from '@mantine/core';
+import {
+  useMantineTheme,
+  useMantineColorScheme,
+  Anchor,
+  Box,
+  Container,
+  Group,
+  Text,
+  Title
+} from '@mantine/core';
 import { BsWhatsapp } from 'react-icons/bs';
 import { RiCake2Fill, RiPhoneFill } from 'react-icons/ri';
 
@@ -27,16 +35,21 @@ export const MemberCard = ({
   phone
 }: MemberCardProps) => {
 
-  const { colors } = useMantineTheme();
+  const { colors, white } = useMantineTheme();
+  const { colorScheme } = useMantineColorScheme();
+  const dark = colorScheme === 'dark';
 
   return (
     <Container
       sx={{
         alignItems: 'center',
-        boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px',
+        backgroundColor: dark ? colors.dark[7] : white,
+        boxShadow: dark ? 'none' : 'rgba(149, 157, 165, 0.2) 0px 8px 24px',
         borderRadius: 10,
         display: 'flex',
-        padding: 15
+        padding: 15,
+        maxWidth: '95vw',
+        height: '300px'
       }}
     >
       <MemberAvatar alt={alt} path={path} />
