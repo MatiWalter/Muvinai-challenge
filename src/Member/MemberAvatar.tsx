@@ -22,14 +22,13 @@ export const MemberAvatar = ({ path, alt }: MemberAvatarProps) => {
   };
 
   return (
-    <Box ml={20} mt={200}>
-      <label htmlFor="icon-button-file" style={{ width: '0', height: '0' }}>
+    <Box sx={{ height: '200px' }}>
+      <label htmlFor="icon-button-file" style={{ display: 'inline-block', height: 1 }}>
         <Input
           accept='image/jpeg, image/png'
           id="icon-button-file"
           sx={{
             display: 'none',
-            width: '200px',
           }}
           type='file'
           onChange={handleImageChange}
@@ -67,7 +66,7 @@ const CustomOverlay = () => {
           backgroundColor: 'rgb(22, 28, 36)',
           cursor: 'pointer',
           opacity: '.72'
-        }
+        },
       }}
     >
       <BsCameraFill size={35} />

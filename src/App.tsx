@@ -59,7 +59,7 @@ function App() {
               hidden={!opened}
               hiddenBreakpoint="sm"
               padding="xs"
-              width={{ base: 200, breakpoints: { sm: '100%', lg: 300 } }}>
+              width={{ base: 250, breakpoints: { sm: '100%', lg: 300 } }}>
               <NavBar />
             </Navbar>
           }
