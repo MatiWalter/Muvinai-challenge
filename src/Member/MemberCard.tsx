@@ -48,7 +48,7 @@ export const MemberCard = ({
         borderRadius: 10,
         display: 'flex',
         padding: 15,
-        maxWidth: '95vw',
+        maxWidth: '85vw',
         height: '300px'
       }}
     >

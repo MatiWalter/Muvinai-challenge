@@ -5,6 +5,7 @@ import { AppBar } from '~/components/AppBar';
 
 import { IMember } from './Member';
 import { MemberProfile } from './Member';
+import { NavBar } from './components/NavBar';
 
 
 function App() {
@@ -59,7 +60,7 @@ function App() {
               hiddenBreakpoint="sm"
               padding="xs"
               width={{ base: 200, breakpoints: { sm: '100%', lg: 300 } }}>
-              <Text>Navegacion</Text>
+              <NavBar />
             </Navbar>
           }
           navbarOffsetBreakpoint="sm"
@@ -67,7 +68,7 @@ function App() {
             main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },
           })}
         >
-          <Space h={100} />
+          <Space h={25} />
           <MemberProfile member={mock} />
         </AppShell>
       </MantineProvider>
