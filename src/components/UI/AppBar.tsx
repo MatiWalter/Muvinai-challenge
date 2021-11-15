@@ -2,19 +2,16 @@ import {
   Group,
   Header,
   Title,
-  useMantineColorScheme,
-  useMantineTheme,
 } from '@mantine/core';
-import { useMediaQuery } from '@mantine/hooks';
+import { useMantineColorScheme, useMantineTheme } from '@mantine/styles';
 
 import { ThemeButton } from './ThemeButton';
 
 export const AppBar = () => {
 
-  const { colorScheme } = useMantineColorScheme();
   const { colors, white } = useMantineTheme();
+  const { colorScheme } = useMantineColorScheme();
   const dark = colorScheme === 'dark';
-
 
   return (
     <Header

@@ -2,15 +2,14 @@ import {
   MediaQuery,
   Text,
   UnstyledButton,
-  useMantineColorScheme,
-  useMantineTheme,
 } from '@mantine/core';
 import { BsSun, BsMoon } from 'react-icons/bs';
+import { useMantineColorScheme, useMantineTheme } from '@mantine/styles';
 
 export const ThemeButton = () => {
 
-  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const { colors, white } = useMantineTheme();
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const dark = colorScheme === 'dark';
 
   return (
