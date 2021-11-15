@@ -1,30 +1,25 @@
 import * as React from 'react';
-import { MantineProvider, ColorSchemeProvider, ColorScheme, Space, AppShell, Navbar, Text, Header, MediaQuery, Burger, useMantineTheme } from '@mantine/core';
+import {
+  AppShell,
+  Burger,
+  ColorScheme,
+  ColorSchemeProvider,
+  Header,
+  MantineProvider,
+  MediaQuery,
+  Space,
+  Tab,
+  Tabs,
+} from '@mantine/core';
+import { useMantineTheme } from '@mantine/styles';
 
-import { AppBar } from '~/components/AppBar';
+import { AppBar } from '~/components/UI';
 
-import { IMember } from './Member';
-import { MemberProfile } from './Member';
-import { NavBar } from './components/NavBar';
-
+import { MedicInfo, MemberProfile } from './Member';
+import { Payments, Edits, Associations, Venues, Coupons } from './components/History';
+import { member } from './data/member';
 
 function App() {
-
-  const mock: IMember = {
-    activePlan: 'Plan Elite Mensual',
-    birthday: new Date(),
-    dni: Math.floor(Math.random() * 100000000).toFixed(),
-    email: 'michael.lawson@reqres.in',
-    id: Math.floor(Math.random() * 100000).toFixed(),
-    lastName: 'Lawson',
-    name: 'Michael',
-    nextPayment: new Date(),
-    phone: Math.floor(Math.random() * 10000000000).toFixed(),
-    registerDate: new Date(),
-    state: 'Activo',
-    subscription: new Date(),
-    avatar: 'https://reqres.in/img/faces/7-image.jpg'
-  };
 
   const [colorScheme, setColorScheme] = React.useState<ColorScheme>('dark');
   const toggleColorScheme = (value?: ColorScheme) =>
@@ -32,6 +27,8 @@ function App() {
 
   const [opened, setOpened] = React.useState<boolean>(false);
   const { colors } = useMantineTheme();
+
+  const [activeTab, setActiveTab] = React.useState<number>(0);
 
   return (
     <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
@@ -54,22 +51,34 @@ function App() {
               </div>
             </Header>
           }
-          navbar={
-            <Navbar
-              hidden={!opened}
-              hiddenBreakpoint="sm"
-              padding="xs"
-              width={{ base: 250, breakpoints: { sm: '100%', lg: 300 } }}>
-              <NavBar />
-            </Navbar>
-          }
-          navbarOffsetBreakpoint="sm"
           styles={(theme) => ({
             main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },
           })}
         >
           <Space h={25} />
-          <MemberProfile member={mock} />
+          <Tabs active={activeTab} initialTab={0} position='center' onTabChange={setActiveTab}>
+            <Tab label='Detalles'>
+              <MemberProfile memberDetail={member} />
+            </Tab>
+            <Tab label='Apto médico'>
+              <MedicInfo />
+            </Tab>
+            <Tab label='Historial de Pagos'>
+              <Payments />
+            </Tab>
+            <Tab label='Historial de Edición'>
+              <Edits />
+            </Tab>
+            <Tab label='Asociaciones Pasadas'>
+              <Associations />
+            </Tab>
+            <Tab label='Uso de cupones'>
+              <Coupons />
+            </Tab>
+            <Tab label='Accesos a sedes'>
+              <Venues />
+            </Tab>
+          </Tabs>
         </AppShell>
       </MantineProvider>
     </ColorSchemeProvider>
