@@ -13,8 +13,7 @@ import {
 } from '@mantine/core';
 import { useMantineTheme } from '@mantine/styles';
 
-import { AppBar } from '~/components/UI';
-
+import { AppBar } from './components/UI';
 import { MedicInfo, MemberProfile } from './Member';
 import { Payments, Edits, Associations, Venues, Coupons } from './components/History';
 import { member } from './data/member';

@@ -2,7 +2,7 @@ import { Container } from '@mantine/core';
 import { useMantineColorScheme, useMantineTheme } from '@mantine/styles';
 import { VictoryPie } from 'victory';
 
-import { venues } from '~/data/venues';
+import { venues } from '../../data/venues';
 
 export const Venues = () => {
 

@@ -2,7 +2,7 @@ import { Container, Table, Title } from '@mantine/core';
 import { useMantineColorScheme, useMantineTheme } from '@mantine/styles';
 import Scrollbars from 'react-custom-scrollbars-2';
 
-import { associations } from '~/data/associations';
+import { associations } from '../../data/associations';
 
 export const Associations = () => {
 

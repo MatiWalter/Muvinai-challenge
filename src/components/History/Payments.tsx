@@ -10,7 +10,7 @@ import { MdPayment } from 'react-icons/md';
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import { useMantineColorScheme, useMantineTheme } from '@mantine/styles';
 
-import { historyPayments } from '~/data/payments';
+import { historyPayments } from '../../data/payments';
 
 export const Payments = () => {
 

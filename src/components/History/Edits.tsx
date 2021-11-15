@@ -5,7 +5,7 @@ import {
 import Scrollbars from 'react-custom-scrollbars-2';
 import { useMantineColorScheme, useMantineTheme } from '@mantine/styles';
 
-import { edits } from '~/data/edits';
+import { edits } from '../../data/edits';
 
 export const Edits = () => {
 

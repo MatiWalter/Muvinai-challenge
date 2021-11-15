@@ -3,7 +3,7 @@ import { Button, Container, Table, Center, Modal } from '@mantine/core';
 import { useMantineColorScheme, useMantineTheme } from '@mantine/styles';
 import Scrollbars from 'react-custom-scrollbars-2';
 
-import { coupons } from '~/data/coupons';
+import { coupons } from '../../../data/coupons';
 
 import { CouponForm } from './CouponForm';
 
