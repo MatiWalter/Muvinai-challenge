@@ -1,6 +1,10 @@
 # Muvinai Challenge
 
-[Live demo](https://muvinai-challenge.vercel.app/)
+[x] [Live demo](https://muvinai-challenge.vercel.app/)
+
+## Fix
+
++ El build de producción tiene un error de que React is not defined, correr solo en local.
 
 ## Pasos a seguir
 
