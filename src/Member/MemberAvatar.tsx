@@ -11,7 +11,11 @@ export const MemberAvatar = ({ path, alt }: MemberAvatarProps) => {
 
   const [avatar, setAvatar] = React.useState<string>(path || '');
 
-  React.useCallback(() => {
+  React.useEffect(() => {
+    setAvatar(path || '');
+  }, [path]);
+
+  React.useEffect(() => {
     setAvatar(avatar);
   }, [avatar]);
 
@@ -22,11 +26,11 @@ export const MemberAvatar = ({ path, alt }: MemberAvatarProps) => {
   };
 
   return (
-    <Box sx={{ height: '200px' }}>
-      <label htmlFor="icon-button-file" style={{ display: 'inline-block', height: 1 }}>
+    <Box ml='md' sx={{ height: '200px' }}>
+      <label htmlFor="avatar-file" style={{ display: 'inline-block', height: 1 }}>
         <Input
           accept='image/jpeg, image/png'
-          id="icon-button-file"
+          id="avatar-file"
           sx={{
             display: 'none',
           }}
@@ -70,7 +74,7 @@ const CustomOverlay = () => {
       }}
     >
       <BsCameraFill size={35} />
-      Update photo
+      Subir foto
     </Box>
   );
 };
