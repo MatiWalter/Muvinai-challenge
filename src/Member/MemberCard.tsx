@@ -1,78 +1,81 @@
+import * as React from 'react';
 import {
-  useMantineTheme,
-  useMantineColorScheme,
   Anchor,
-  Box,
   Container,
   Group,
   Text,
-  Title
+  Title,
+  Box,
+  Badge
 } from '@mantine/core';
+import { useMantineColorScheme, useMantineTheme } from '@mantine/styles';
 import { BsWhatsapp } from 'react-icons/bs';
-import { RiCake2Fill, RiPhoneFill } from 'react-icons/ri';
+
 
 import { MemberAvatar } from './MemberAvatar';
+import { IMember } from './types';
 
 interface MemberCardProps {
-  name?: string;
-  lastName?: string;
-  path?: string;
+  memberDetail: IMember;
   alt?: string;
-  email?: string;
-  birthday?: Date;
-  dni?: string;
-  phone?: string;
 }
 
 export const MemberCard = ({
-  name,
-  lastName,
-  path,
-  alt,
-  email,
-  birthday,
-  dni,
-  phone
+  memberDetail,
+  alt
 }: MemberCardProps) => {
 
   const { colors, white } = useMantineTheme();
   const { colorScheme } = useMantineColorScheme();
   const dark = colorScheme === 'dark';
 
+  const [member, setMember] = React.useState<IMember>({} as IMember);
+
+  React.useEffect(() => {
+    if(memberDetail) {
+      setMember(memberDetail || {} as IMember);
+    }
+  }, [memberDetail]);
+
   return (
     <Container
       sx={{
         alignItems: 'center',
-        backgroundColor: dark ? colors.dark[7] : white,
-        boxShadow: dark ? 'none' : 'rgba(149, 157, 165, 0.2) 0px 8px 24px',
-        borderRadius: 10,
         display: 'flex',
         padding: 15,
-        maxWidth: '85vw',
-        height: '300px'
+        height: '300px',
       }}
     >
-      <MemberAvatar alt={alt} path={path} />
-      <Group align='center' direction='column' ml='md' spacing='xs'>
-        <Group spacing='xs'>
-          <Title order={2}>{name} {lastName}</Title>
-          <Box>
-            <Anchor href='#' sx={{ display: 'flex', alignItems: 'center' }} target="_blank">
-              <BsWhatsapp color={colors.green[8]} size={25} />
+      <MemberAvatar alt={alt || member?.name} path={member?.avatar} />
+      <Group align='start' direction='column' ml='md' spacing={5} sx={{ width: '250px' }}>
+        <Group spacing={1}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row' }}>
+              <Text mr='xs' size='sm'>Socio N° {member?.id}</Text>
+              <Badge
+                color={member?.state === 'Activo' ? 'green' : 'red'}
+                variant={dark ? 'filled' : 'outline'}
+              >
+                {member?.state}
+              </Badge>
+            </Box>
+            <Group spacing='xs'>
+              <Title order={2}>{member?.name} {member?.lastName}</Title>
+              <Anchor
+                href={`https://api.whatsapp.com/send?phone=${member?.phone}`}
+                sx={{ display: 'flex', alignItems: 'center' }}
+              >
+                <BsWhatsapp color={colors.green[8]} size={25} />
+              </Anchor>
+            </Group>
+            <Anchor href={`mailto: ${member.email}`} target='_blank'>
+              <Text>{member?.email}</Text>
             </Anchor>
           </Box>
         </Group>
-        <Group align='center' direction='column' spacing='xs'>
-          <Text>{email}</Text>
-          <Group spacing='xs'>
-            <RiPhoneFill color={colors.blue[8]} size={25} />
-            <Text>+{phone}</Text>
-          </Group>
-          <Group spacing='xs'>
-            <RiCake2Fill color={colors.red[9]} size={25} />
-            <Text>{birthday?.toLocaleDateString()}</Text>
-          </Group>
-          <Text>DNI: {dni}</Text>
+        <Group align='start' direction='column' mt='xs' spacing={1}>
+          <Text>Subscripción actual: {member?.subscription?.toLocaleDateString()}</Text>
+          <Text>Proximo pago: {member?.nextPayment?.toLocaleDateString()}</Text>
         </Group>
       </Group>
     </Container>
