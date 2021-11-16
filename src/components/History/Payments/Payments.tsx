@@ -8,15 +8,16 @@ import {
 } from '@mantine/core';
 import { MdPayment } from 'react-icons/md';
 import { Scrollbars } from 'react-custom-scrollbars-2';
-import { useMantineColorScheme, useMantineTheme } from '@mantine/styles';
+import { useMantineTheme } from '@mantine/styles';
 
-import { historyPayments } from '../../data/payments';
+import { historyPayments } from '~/data/payments';
+
+import useStyles from './Payments.styles';
 
 export const Payments = () => {
 
-  const { colors, white } = useMantineTheme();
-  const { colorScheme } = useMantineColorScheme();
-  const dark = colorScheme === 'dark';
+  const { classes: { container } } = useStyles();
+  const { colors } = useMantineTheme();
 
   const items = historyPayments.map((payment) => {
     return (
@@ -33,12 +34,7 @@ export const Payments = () => {
         }
       >
         <Box ml='sm'>
-          <Title
-            order={4}
-            sx={{
-              color: payment.completed ? colors.green[8] : colors.red[8]
-            }}
-          >
+          <Title order={4} sx={{ color: payment.completed ? colors.green[8] : colors.red[8] }}>
             {payment.completed ? 'Aceptado' : 'Rechazado'}
           </Title>
           <Box sx={{ flexDirection: 'column' }}>
@@ -53,17 +49,7 @@ export const Payments = () => {
   });
 
   return (
-    <Container
-      mt='xl'
-      sx={{
-        backgroundColor: dark ? colors.dark[7] : white,
-        boxShadow: dark ? 'none' : 'rgba(149, 157, 165, 0.2) 0px 8px 24px',
-        borderRadius: 10,
-        padding: 25,
-        maxWidth: '600px',
-        height: '650px'
-      }}
-    >
+    <Container className={container}>
       <Scrollbars>
         <Timeline active={historyPayments.length} bulletSize={30} color='gray'>
           {items}
