@@ -1,17 +1,13 @@
 import * as React from 'react';
 import { Button, Container, Table, Center, Modal } from '@mantine/core';
-import { useMantineColorScheme, useMantineTheme } from '@mantine/styles';
 import Scrollbars from 'react-custom-scrollbars-2';
 
-import { coupons } from '../../../data/coupons';
+import { coupons } from '~/data/coupons';
 
 import { CouponForm } from './CouponForm';
+import useStyles from './Coupons.Styles';
 
 export const Coupons = () => {
-
-  const { colors, white } = useMantineTheme();
-  const { colorScheme } = useMantineColorScheme();
-  const dark = colorScheme === 'dark';
 
   const [opened, setOpened] = React.useState<boolean>(false);
 
@@ -26,18 +22,10 @@ export const Coupons = () => {
     );
   });
 
+  const { classes } = useStyles();
+
   return (
-    <Container
-      mt='xl'
-      sx={{
-        backgroundColor: dark ? colors.dark[7] : white,
-        boxShadow: dark ? 'none' : 'rgba(149, 157, 165, 0.2) 0px 8px 24px',
-        borderRadius: 10,
-        padding: 25,
-        maxWidth: '800px',
-        height: '500px'
-      }}
-    >
+    <Container className={classes.container}>
       <Scrollbars autoHeight autoHeightMax={400}>
         <Table highlightOnHover striped>
           <thead>
