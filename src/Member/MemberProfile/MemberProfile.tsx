@@ -7,22 +7,19 @@ import {
   List,
   ThemeIcon,
 } from '@mantine/core';
-import { useMantineColorScheme, useMantineTheme } from '@mantine/styles';
 import { MdDelete, MdBlock, MdInfoOutline, MdPlayCircleOutline } from 'react-icons/md';
 
-import { IMember } from './types';
-import { MemberCard } from './MemberCard';
-import { MemberForm } from './MemberForm';
+import { IMember } from '../types';
+import { MemberCard } from '../MemberCard/MemberCard';
+import { MemberForm } from '../MemberForm';
+
+import useStyles from './MemberProfile.styles';
 
 interface MemberProfileProps {
   memberDetail: IMember;
 }
 
 export const MemberProfile = ({ memberDetail }: MemberProfileProps) => {
-
-  const { colors, white } = useMantineTheme();
-  const { colorScheme } = useMantineColorScheme();
-  const dark = colorScheme === 'dark';
 
   const [member, setMember] = React.useState<IMember>({} as IMember);
 
@@ -32,22 +29,10 @@ export const MemberProfile = ({ memberDetail }: MemberProfileProps) => {
     }
   }, [memberDetail]);
 
+  const { classes: { container } }= useStyles();
+
   return (
-    <Container
-      mt='xl'
-      sx={{
-        backgroundColor: dark ? colors.dark[7] : white,
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,
-        boxShadow: dark ? 'none' : 'rgba(149, 157, 165, 0.2) 0px 8px 24px',
-        display: 'flex',
-        flexDirection: 'row',
-        height: '700px',
-        justifyContent: 'space-evenly',
-        maxWidth: '85vw',
-        padding: 15,
-      }}
-    >
+    <Container className={container}>
       <Box>
         <MemberCard
           alt={member?.name}
