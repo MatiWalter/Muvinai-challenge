@@ -11,9 +11,10 @@ import {
 import { useMantineColorScheme, useMantineTheme } from '@mantine/styles';
 import { BsWhatsapp } from 'react-icons/bs';
 
+import { MemberAvatar } from '../MemberAvatar/MemberAvatar';
+import { IMember } from '../types';
 
-import { MemberAvatar } from './MemberAvatar';
-import { IMember } from './types';
+import useStyles from './MemberCard.styles';
 
 interface MemberCardProps {
   memberDetail: IMember;
@@ -25,7 +26,7 @@ export const MemberCard = ({
   alt
 }: MemberCardProps) => {
 
-  const { colors, white } = useMantineTheme();
+  const { colors } = useMantineTheme();
   const { colorScheme } = useMantineColorScheme();
   const dark = colorScheme === 'dark';
 
@@ -37,20 +38,15 @@ export const MemberCard = ({
     }
   }, [memberDetail]);
 
+  const { classes: { anchor, container, boxColumn, boxRow, group } }= useStyles();
+
   return (
-    <Container
-      sx={{
-        alignItems: 'center',
-        display: 'flex',
-        padding: 15,
-        height: '300px',
-      }}
-    >
+    <Container className={container}>
       <MemberAvatar alt={alt || member?.name} path={member?.avatar} />
-      <Group align='start' direction='column' ml='md' spacing={5} sx={{ width: '250px' }}>
+      <Group className={group} spacing={5}>
         <Group spacing={1}>
-          <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row' }}>
+          <Box className={boxColumn}>
+            <Box className={boxRow}>
               <Text mr='xs' size='sm'>Socio N° {member?.id}</Text>
               <Badge
                 color={member?.state === 'Activo' ? 'green' : 'red'}
@@ -62,8 +58,8 @@ export const MemberCard = ({
             <Group spacing='xs'>
               <Title order={2}>{member?.name} {member?.lastName}</Title>
               <Anchor
+                className={anchor}
                 href={`https://api.whatsapp.com/send?phone=${member?.phone}`}
-                sx={{ display: 'flex', alignItems: 'center' }}
               >
                 <BsWhatsapp color={colors.green[8]} size={25} />
               </Anchor>

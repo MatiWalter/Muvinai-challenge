@@ -3,6 +3,8 @@ import { Box, Button, Select, Space, TextInput } from '@mantine/core';
 import { DatePicker } from '@mantine/dates';
 import dayjs from 'dayjs';
 
+import useStyles from './CouponForm.styles';
+
 interface CouponFormProps {
   setOpened: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -20,9 +22,11 @@ export const CouponForm = ({ setOpened }: CouponFormProps) => {
 
   const [expirationDate, setExpirationDate] = React.useState<Date>(new Date);
 
+  const { classes: { box, innerBox, buttonBox } } = useStyles();
+
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-      <Box sx={{ width: '300px' }}>
+    <Box className={box}>
+      <Box className={innerBox}>
         <Space h='xl' />
         <TextInput
           label='Codigo'
@@ -46,7 +50,7 @@ export const CouponForm = ({ setOpened }: CouponFormProps) => {
           onChange={(date) => setExpirationDate(date || new Date)}
         />
         <Space h='xl' />
-        <Box sx={{ display: 'grid', placeContent: 'center' }}>
+        <Box className={buttonBox}>
           <Button
             color='green'
             onClick={() => setOpened(false)}

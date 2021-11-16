@@ -1,20 +1,16 @@
 import * as React from 'react';
 import {
   AppShell,
-  Burger,
   ColorScheme,
   ColorSchemeProvider,
   Header,
   MantineProvider,
-  MediaQuery,
   Space,
   Tab,
   Tabs,
 } from '@mantine/core';
-import { useMantineTheme } from '@mantine/styles';
 
 import { AppBar } from './components/UI';
-
 import { MedicInfo, MemberProfile } from './Member';
 import { Payments, Edits, Associations, Venues, Coupons } from './components/History';
 import { member } from './data/member';
@@ -25,9 +21,6 @@ function App() {
   const toggleColorScheme = (value?: ColorScheme) =>
     setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
 
-  const [opened, setOpened] = React.useState<boolean>(false);
-  const { colors } = useMantineTheme();
-
   const [activeTab, setActiveTab] = React.useState<number>(0);
 
   return (
@@ -37,18 +30,7 @@ function App() {
           fixed
           header={
             <Header height={60}>
-              <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-                <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
-                  <Burger
-                    color={colors.gray[6]}
-                    ml='xs'
-                    opened={opened}
-                    size="sm"
-                    onClick={() => setOpened(!opened)}
-                  />
-                </MediaQuery>
-                <AppBar />
-              </div>
+              <AppBar />
             </Header>
           }
           styles={(theme) => ({

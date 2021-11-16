@@ -1,2 +1,2 @@
-export { AppBar } from './AppBar';
-export { ThemeButton } from './ThemeButton';
+export { AppBar } from './AppBar/AppBar';
+export { ThemeButton } from './ThemeButton/ThemeButton';

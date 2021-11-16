@@ -3,15 +3,12 @@ import {
   Table,
 } from '@mantine/core';
 import Scrollbars from 'react-custom-scrollbars-2';
-import { useMantineColorScheme, useMantineTheme } from '@mantine/styles';
 
-import { edits } from '../../data/edits';
+import { edits } from '~/data/edits';
+
+import useStyles from './Edits.styles';
 
 export const Edits = () => {
-
-  const { colors, white } = useMantineTheme();
-  const { colorScheme } = useMantineColorScheme();
-  const dark = colorScheme === 'dark';
 
   const rows = edits.map(edit => {
     return (
@@ -26,18 +23,10 @@ export const Edits = () => {
     );
   });
 
+  const { classes: { container } } = useStyles();
+
   return (
-    <Container
-      mt='xl'
-      sx={{
-        backgroundColor: dark ? colors.dark[7] : white,
-        boxShadow: dark ? 'none' : 'rgba(149, 157, 165, 0.2) 0px 8px 24px',
-        borderRadius: 10,
-        padding: 25,
-        maxWidth: '85vw',
-        height: '600px'
-      }}
-    >
+    <Container className={container}>
       <Scrollbars>
         <Table highlightOnHover>
           <thead>
